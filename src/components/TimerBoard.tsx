@@ -1,10 +1,12 @@
-import React from "react";
-
-function pad(n) {
+function pad(n: number): string {
   return String(n).padStart(2, "0");
 }
 
-function FlapDigit({ char }) {
+type FlapDigitProps = {
+  char: string;
+};
+
+function FlapDigit({ char }: FlapDigitProps) {
   return (
     <span
       className="inline-flex items-center justify-center rounded-md sm:rounded-lg"
@@ -25,7 +27,11 @@ function FlapDigit({ char }) {
   );
 }
 
-function TimerBoard({ seconds }) {
+type TimerBoardProps = {
+  seconds: number;
+};
+
+function TimerBoard({ seconds }: TimerBoardProps) {
   const m = pad(Math.floor(seconds / 60));
   const s = pad(seconds % 60);
   const chars = [...m, ":", ...s];
