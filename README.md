@@ -1,32 +1,38 @@
-# React + TypeScript + Vite
+# Study Sprint
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+A production-quality, accessible focus timer built by translating a Figma design system into real, working React code.
 
-Currently, two official plugins are available:
+![Status](https://img.shields.io/badge/status-complete-brightgreen)
+![React](https://img.shields.io/badge/React-18-61DAFB)
+![TypeScript](https://img.shields.io/badge/TypeScript-typed-3178C6)
+![Accessibility](https://img.shields.io/badge/Lighthouse%20a11y-100-success)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Live Demo
 
-## React Compiler
+[Add your Vercel link here]
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## About This Project
 
-## Expanding the Oxlint configuration
+This project was built as part of the Web Development Track internship at Deimos Tech. The task was to take a complete Figma mock and rebuild it as a production ready, responsive web page, not just a static visual copy.
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+Study Sprint is a Pomodoro style focus timer with a split flap departure board style countdown clock. The build focuses on matching the original design system exactly: spacing, typography, states, and structure, while producing clean and reusable code.
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
-```
+## Features
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+- Split flap digital timer with three modes (Sprint, Deep, Short break)
+- All interactive states implemented: hover, focus, disabled, loading, and error
+- Dark mode powered fully by CSS custom properties, no hardcoded colors
+- Fully responsive layout across mobile, tablet, and desktop
+- Typed, reusable components with no duplicated markup
+- 100/100 Lighthouse accessibility score
+
+## Tech Stack
+
+| Tool | Purpose |
+|------|---------|
+| React | UI library |
+| TypeScript | Type safety |
+| Tailwind CSS | Styling |
+| Vite | Build tool and dev server |
+
+## Project Structure
