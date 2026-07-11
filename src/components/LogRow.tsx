@@ -11,8 +11,8 @@ type LogRowProps = {
 
 function LogRow({ entry }: LogRowProps) {
   const statusStyles: Record<LogEntry["status"], { label: string; bg: string; fg: string }> = {
-    done: { label: "Completed", bg: "var(--teal-soft)", fg: "var(--teal)" },
-    skipped: { label: "Skipped", bg: "var(--danger-soft)", fg: "var(--danger)" },
+    done: { label: "Completed", bg: "var(--teal-soft)", fg: "var(--teal-text)" },
+    skipped: { label: "Skipped", bg: "var(--danger-soft)", fg: "var(--danger-text)" },
   };
   const s = statusStyles[entry.status];
   return (
