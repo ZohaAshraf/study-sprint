@@ -1,24 +1,32 @@
-# Study Sprint — Focus Session Tracker
+# React + TypeScript + Vite
 
-A production-quality, accessible focus timer built by translating a Figma design system into real, working React code — not just a visual copy.
+This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
 
-## Live Demo
-[Add your Vercel link here]
+Currently, two official plugins are available:
 
-## Overview
-Study Sprint is a Pomodoro-style focus timer with a split-flap departure-board style countdown clock. Built as part of the Web Dev Track internship task at Deimos Tech, the goal was to match a given design file exactly — spacing, states, and structure — while producing clean, reusable, accessible code.
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
 
-## Features
-- Split-flap digital timer display (Sprint / Deep / Short break modes)
-- Full interactive states: hover, focus, disabled, loading, error
-- Dark mode powered entirely by CSS custom properties (design tokens) — no hardcoded colors
-- Fully responsive layout across mobile, tablet, and desktop
-- Typed, reusable components with no duplicated markup
-- 100/100 Lighthouse accessibility score
+## React Compiler
 
-## Tech Stack
-- React + TypeScript
-- Tailwind CSS
-- Vite
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-## Project Structure
+## Expanding the Oxlint configuration
+
+If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+
+```json
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": ["react", "typescript", "oxc"],
+  "options": {
+    "typeAware": true
+  },
+  "rules": {
+    "react/rules-of-hooks": "error",
+    "react/only-export-components": ["warn", { "allowConstantExport": true }]
+  }
+}
+```
+
+See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
