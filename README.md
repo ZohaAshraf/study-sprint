@@ -9,7 +9,7 @@ A production-quality, accessible focus timer built by translating a Figma design
 
 ## Live Demo
 
-[Add your Vercel link here]
+https://vercel.com/zohaashrafs-projects/study-sprint-3qhx
 
 ## About This Project
 
