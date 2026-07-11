@@ -1,14 +1,22 @@
-import React from "react";
+type ButtonProps = {
+  children: React.ReactNode;
+  variant?: "primary" | "ghost" | "danger";
+  size?: "sm" | "md" | "lg";
+  disabled?: boolean;
+  loading?: boolean;
+  onClick?: () => void;
+  type?: "button" | "submit" | "reset";
+};
 
-function Button({ children, variant = "primary", size = "md", disabled, loading, onClick, type = "button" }) {
+function Button({ children, variant = "primary", size = "md", disabled, loading, onClick, type = "button" }: ButtonProps) {
   const base =
     "relative inline-flex items-center justify-center gap-2 rounded-full font-medium tracking-tight " +
     "transition-all duration-200 ease-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 " +
     "disabled:cursor-not-allowed disabled:opacity-45 active:scale-[0.97]";
 
-  const sizes = { sm: "text-sm px-4 py-2", md: "text-sm px-5 py-2.5", lg: "text-base px-7 py-3.5" };
+  const sizes: Record<string, string> = { sm: "text-sm px-4 py-2", md: "text-sm px-5 py-2.5", lg: "text-base px-7 py-3.5" };
 
-  const styleByVariant = {
+  const styleByVariant: Record<string, React.CSSProperties> = {
     primary: {
       background: "var(--amber)",
       color: "var(--board)",
