@@ -1,7 +1,13 @@
-import React from "react";
+type Tone = "ink" | "teal" | "amber";
 
-function StatBadge({ label, value, tone = "ink" }) {
-  const toneMap = {
+type StatBadgeProps = {
+  label: string;
+  value: string;
+  tone?: Tone;
+};
+
+function StatBadge({ label, value, tone = "ink" }: StatBadgeProps) {
+  const toneMap: Record<Tone, { bg: string; fg: string }> = {
     ink: { bg: "var(--surface-2)", fg: "var(--ink)" },
     teal: { bg: "var(--teal-soft)", fg: "var(--teal)" },
     amber: { bg: "var(--amber-soft)", fg: "var(--amber)" },
