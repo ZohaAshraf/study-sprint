@@ -141,8 +141,7 @@ export default function App() {
         rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap"
       />
-
-      <div className="mx-auto max-w-5xl px-5 sm:px-8 py-8 sm:py-12" style={{ fontFamily: "'Inter', sans-serif" }}>
+<main className="mx-auto max-w-5xl px-5 sm:px-8 py-8 sm:py-12" style={{ fontFamily: "'Inter', sans-serif" }}>
         <header className="flex items-center justify-between mb-10 sm:mb-14">
           <div className="flex items-center gap-2.5">
             <span
