@@ -1,6 +1,7 @@
 import type { ReactNode, CSSProperties } from "react";
+
 type ButtonProps = {
-  children: React.ReactNode;
+  children: ReactNode;
   variant?: "primary" | "ghost" | "danger";
   size?: "sm" | "md" | "lg";
   disabled?: boolean;
@@ -17,7 +18,7 @@ function Button({ children, variant = "primary", size = "md", disabled, loading,
 
   const sizes: Record<string, string> = { sm: "text-sm px-4 py-2", md: "text-sm px-5 py-2.5", lg: "text-base px-7 py-3.5" };
 
-  const styleByVariant: Record<string, React.CSSProperties> = {
+  const styleByVariant: Record<string, CSSProperties> = {
     primary: {
       background: "var(--amber)",
       color: "var(--board)",
