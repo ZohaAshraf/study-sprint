@@ -36,3 +36,6 @@ Study Sprint is a Pomodoro style focus timer with a split flap departure board s
 | Vite | Build tool and dev server |
 
 ## Project Structure
+## Acknowledgements
+
+Design mock provided as part of the Deimos Tech Web Development Track internship program.
