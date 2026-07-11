@@ -152,3 +152,182 @@ export default function App() {
           <div className="flex items-center gap-2.5">
             <span
               aria-hidden="true"
+              className="inline-block h-2.5 w-2.5 rounded-full"
+              style={{ background: "var(--amber)" }}
+            />
+            <span
+              className="text-sm font-semibold uppercase tracking-[0.14em]"
+              style={{ color: "var(--ink-soft)" }}
+            >
+              Study Sprint
+            </span>
+          </div>
+
+          <button
+            type="button"
+            onClick={() => setTheme((t) => (t === "light" ? "dark" : "light"))}
+            aria-pressed={theme === "dark"}
+            aria-label="Toggle dark mode"
+            className="flex items-center gap-2 rounded-full px-3.5 py-2 text-xs font-medium transition-transform duration-200 active:scale-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
+            style={{ background: "var(--surface-2)", color: "var(--ink)", outlineColor: "var(--teal)", border: "1px solid var(--line)" }}
+          >
+            <span
+              aria-hidden="true"
+              className="h-3.5 w-3.5 rounded-full"
+              style={{ background: theme === "light" ? "var(--amber)" : "var(--teal)" }}
+            />
+            {theme === "light" ? "Light" : "Dark"}
+          </button>
+        </header>
+
+        <section className="grid grid-cols-1 lg:grid-cols-[1.3fr_1fr] gap-6 sm:gap-8 mb-10">
+          <div
+            className="rounded-2xl p-6 sm:p-9"
+            style={{ background: "var(--surface)", boxShadow: "var(--shadow)" }}
+          >
+            <h1
+              className="mb-1"
+              style={{
+                fontFamily: "'Fraunces', serif",
+                fontSize: "clamp(1.6rem, 3.5vw, 2.1rem)",
+                fontWeight: 600,
+                color: "var(--ink)",
+                letterSpacing: "-0.01em",
+              }}
+            >
+              {complete ? "Sprint complete" : running ? "In progress" : "Ready when you are"}
+            </h1>
+            <p className="text-sm mb-6 sm:mb-8" style={{ color: "var(--ink-soft)" }}>
+              {DURATIONS[durationIdx].label} · {DURATIONS[durationIdx].minutes} minutes, heads down.
+            </p>
+
+            <div className="flex flex-wrap items-end justify-between gap-6">
+              <TimerBoard seconds={secondsLeft} />
+
+              <div className="hidden sm:flex flex-col items-end gap-1 min-w-[6rem]" aria-hidden="true">
+                <div className="w-28 h-1.5 rounded-full overflow-hidden" style={{ background: "var(--surface-2)" }}>
+                  <div
+                    className="h-full rounded-full"
+                    style={{
+                      width: `${pct}%`,
+                      background: complete ? "var(--teal)" : "var(--amber)",
+                      transition: "width 900ms linear",
+                    }}
+                  />
+                </div>
+                <span className="text-xs" style={{ color: "var(--ink-soft)" }}>
+                  {pct}% through
+                </span>
+              </div>
+            </div>
+
+            <div className="flex flex-wrap gap-2 mt-7 sm:mt-8 mb-6">
+              {DURATIONS.map((d, idx) => {
+                const active = idx === durationIdx;
+                return (
+                  <button
+                    key={d.label}
+                    type="button"
+                    disabled={running}
+                    onClick={() => handleDurationChange(idx)}
+                    aria-pressed={active}
+                    className="text-xs font-medium rounded-full px-3.5 py-1.5 transition-colors duration-150 disabled:cursor-not-allowed disabled:opacity-40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
+                    style={{
+                      background: active ? "var(--amber-soft)" : "transparent",
+                      color: active ? "var(--amber-text)" : "var(--ink-soft)",
+                      border: `1px solid ${active ? "var(--amber)" : "var(--line)"}`,
+                      outlineColor: "var(--teal)",
+                    }}
+                  >
+                    {d.label} · {d.minutes}m
+                  </button>
+                );
+              })}
+            </div>
+
+            <div className="flex flex-wrap items-center gap-3">
+              {!complete ? (
+                <>
+                  <Button variant="primary" size="lg" onClick={() => setRunning((r) => !r)}>
+                    {running ? "Pause" : secondsLeft === total ? "Start sprint" : "Resume"}
+                  </Button>
+                  <Button variant="ghost" onClick={handleReset} disabled={secondsLeft === total && !running}>
+                    Reset
+                  </Button>
+                </>
+              ) : (
+                <>
+                  <Button variant="primary" size="lg" loading={syncing} onClick={handleFinishSync}>
+                    {syncing ? "Saving to log…" : "Save to log"}
+                  </Button>
+                  <Button variant="ghost" onClick={handleReset}>
+                    Discard
+                  </Button>
+                </>
+              )}
+            </div>
+
+            {syncError && (
+              <div
+                role="alert"
+                className="mt-4 flex items-start gap-2.5 rounded-xl px-4 py-3 text-sm"
+                style={{ background: "var(--danger-soft)", color: "var(--danger)" }}
+              >
+                <span aria-hidden="true" className="mt-0.5">⚠</span>
+                <span>
+                  Couldn't save your sprint — the connection dropped. Your time isn't lost; try saving again.
+                </span>
+              </div>
+            )}
+          </div>
+
+          <div className="flex flex-col gap-4">
+            <div
+              className="rounded-2xl p-5 sm:p-6 flex flex-wrap gap-3"
+              style={{ background: "var(--surface)", boxShadow: "var(--shadow)" }}
+            >
+              <StatBadge label="Today" value="2h 15m" tone="amber" />
+              <StatBadge label="Streak" value="6 days" tone="teal" />
+              <StatBadge label="Sprints" value="3" tone="ink" />
+            </div>
+            <div
+              className="rounded-2xl p-5 sm:p-6 text-sm leading-relaxed"
+              style={{ background: "var(--surface)", boxShadow: "var(--shadow)", color: "var(--ink-soft)" }}
+            >
+              <p style={{ color: "var(--ink)" }} className="font-medium mb-1.5">
+                Board tip
+              </p>
+              Sprints under 30 minutes save automatically to today's log — no need to name them until you review.
+            </div>
+          </div>
+        </section>
+
+        <section
+          className="rounded-2xl p-6 sm:p-8"
+          style={{ background: "var(--surface)", boxShadow: "var(--shadow)" }}
+        >
+          <div className="flex items-center justify-between mb-2">
+            <h2
+              style={{
+                fontFamily: "'Fraunces', serif",
+                fontSize: "1.15rem",
+                fontWeight: 600,
+                color: "var(--ink)",
+              }}
+            >
+              Today's log
+            </h2>
+            <span className="text-xs" style={{ color: "var(--ink-soft)" }}>
+              {log.length} entries
+            </span>
+          </div>
+          <ul>
+            {log.map((entry, i) => (
+              <LogRow key={i} entry={entry} />
+            ))}
+          </ul>
+        </section>
+      </main>
+    </div>
+  );
+}
