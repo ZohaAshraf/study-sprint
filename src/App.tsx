@@ -2,7 +2,7 @@ import Button from "./components/Button";
 import TimerBoard from "./components/TimerBoard";
 import StatBadge from "./components/StatBadge";
 import LogRow from "./components/LogRow";
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 
 /**
  * STUDY SPRINT — Focus Session Tracker
@@ -55,9 +55,12 @@ const DURATIONS = [
   { label: "Short break", minutes: 5 },
 ];
 
-
-
-
+type LogEntry = {
+  label: string;
+  time: string;
+  minutes: number;
+  status: "done" | "skipped";
+};
 
 export default function App() {
   const [theme, setTheme] = useState("light");
@@ -66,18 +69,18 @@ export default function App() {
   const [running, setRunning] = useState(false);
   const [syncing, setSyncing] = useState(false);
   const [syncError, setSyncError] = useState(false);
-  const [log, setLog] = useState([
+  const [log, setLog] = useState<LogEntry[]>([
     { label: "Deep work — Bison grammar", time: "9:10 AM", minutes: 50, status: "done" },
     { label: "Sprint — SHAP write-up", time: "8:20 AM", minutes: 25, status: "skipped" },
   ]);
-  const intervalRef = useRef(null);
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   useEffect(() => {
     if (running && secondsLeft > 0) {
       intervalRef.current = setInterval(() => {
         setSecondsLeft((s) => {
           if (s <= 1) {
-            clearInterval(intervalRef.current);
+            if (intervalRef.current) clearInterval(intervalRef.current);
             setRunning(false);
             return 0;
           }
@@ -85,7 +88,9 @@ export default function App() {
         });
       }, 1000);
     }
-    return () => clearInterval(intervalRef.current);
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+    };
   }, [running]);
 
   const total = DURATIONS[durationIdx].minutes * 60;
@@ -93,7 +98,7 @@ export default function App() {
   const complete = secondsLeft === 0;
 
   const handleDurationChange = useCallback(
-    (idx) => {
+    (idx: number) => {
       if (running) return;
       setDurationIdx(idx);
       setSecondsLeft(DURATIONS[idx].minutes * 60);
