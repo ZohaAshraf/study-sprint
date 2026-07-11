@@ -1,3 +1,4 @@
+import type { ReactNode, CSSProperties } from "react";
 type ButtonProps = {
   children: React.ReactNode;
   variant?: "primary" | "ghost" | "danger";
