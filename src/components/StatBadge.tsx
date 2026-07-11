@@ -9,8 +9,8 @@ type StatBadgeProps = {
 function StatBadge({ label, value, tone = "ink" }: StatBadgeProps) {
   const toneMap: Record<Tone, { bg: string; fg: string }> = {
     ink: { bg: "var(--surface-2)", fg: "var(--ink)" },
-    teal: { bg: "var(--teal-soft)", fg: "var(--teal)" },
-    amber: { bg: "var(--amber-soft)", fg: "var(--amber)" },
+    teal: { bg: "var(--teal-soft)", fg: "var(--teal-text)" },
+    amber: { bg: "var(--amber-soft)", fg: "var(--amber-text)" },
   };
   const t = toneMap[tone];
   return (
