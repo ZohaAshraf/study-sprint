@@ -1,7 +1,16 @@
-import React from "react";
+type LogEntry = {
+  label: string;
+  time: string;
+  minutes: number;
+  status: "done" | "skipped";
+};
 
-function LogRow({ entry }) {
-  const statusStyles = {
+type LogRowProps = {
+  entry: LogEntry;
+};
+
+function LogRow({ entry }: LogRowProps) {
+  const statusStyles: Record<LogEntry["status"], { label: string; bg: string; fg: string }> = {
     done: { label: "Completed", bg: "var(--teal-soft)", fg: "var(--teal)" },
     skipped: { label: "Skipped", bg: "var(--danger-soft)", fg: "var(--danger)" },
   };
